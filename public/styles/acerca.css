@@ -1,0 +1,108 @@
+/* === Acerca de Nosotros - CashApp === */
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e6f3ff 100%);
+  color: #07141c;
+  margin: 0;
+  padding: 0;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid #e0e6ed;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  z-index: 1000;
+}
+
+.logo {
+  height: 45px;
+}
+
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #0082fc;
+  cursor: pointer;
+}
+
+.main-content {
+  padding-top: 100px;
+  padding-bottom: 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-section {
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(8, 130, 252, 0.08);
+  border: 1px solid #e0e6ed;
+}
+
+.about-container h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0082fc 0%, #0aadce 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.about-container p {
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #283a3e;
+  margin-bottom: 1.2rem;
+  text-align: justify;
+}
+
+.about-container strong {
+  color: #0082fc;
+}
+
+footer {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  font-size: 0.9rem;
+  color: #283a3e;
+  border-top: 1px solid #e0e6ed;
+  background: white;
+}
+
+.partner-logo {
+  height: 32px;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+.partner-logo:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 1rem;
+  }
+
+  .about-container h2 {
+    font-size: 1.6rem;
+  }
+
+  .about-container p {
+    font-size: 0.95rem;
+  }
+}

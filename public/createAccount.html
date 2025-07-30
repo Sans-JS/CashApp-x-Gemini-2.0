@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - CashApp</title>
+    <link rel="stylesheet" href="styles/registro.css" />
+</head>
+
+<body>
+    <!-- ENCABEZADO -->
+    <header class="header">
+        <img src="../styles/img/cashapp-logo.png" alt="CashApp Logo" class="logo">
+        <a href="login.html"><img src="../styles/img/icono-usuario.png" alt="Perfil" class="profile-icon"></a>
+    </header>
+
+    <!-- FORMULARIO DE REGISTRO -->
+    <main class="main-content">
+        <section class="formulario">
+            <h1>Crea una cuenta</h1>
+            <p>¿Ya estás registrado? <a href="login.html">Inicia sesión</a></p>
+
+            <form action="/register" method="POST">
+                <input type="text" name="username" placeholder="Usuario" required />
+                <input type="password" name="password" placeholder="Contraseña" required />
+                <button type="submit" class="boton">Regístrate</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        © 2025 CashApp. Todos los derechos reservados.
+        <a href="aboutUs.html"><img src="../styles/img/inmatec-logo.png" alt="INMATEC" class="partner-logo"></a>
+    </footer>
+</body>
+
+</html>

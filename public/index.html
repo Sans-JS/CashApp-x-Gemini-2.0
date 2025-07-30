@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CashApp - Panel de Inicio</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <style>
+        .message {
+            padding: 10px 14px;
+            border-radius: 14px;
+            margin: 8px 0;
+            max-width: 80%;
+            line-height: 1.4;
+            display: inline-block;
+        }
+
+        .user-message {
+            background-color: #dcf8c6;
+            text-align: right;
+            align-self: flex-end;
+        }
+
+        .bot-message {
+            background-color: #e5e5ea;
+            text-align: left;
+            align-self: flex-start;
+        }
+
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-top: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Encabezado Moderno -->
+    <header class="header">
+        <a href="index.html"><img src="styles/img/cashapp-logo.png" alt="CashApp Logo" class="logo" /></a>
+        <div class="profile-container">
+            <img src="https://marketplace.canva.com/A5alg/MAESXCA5alg/1/tl/canva-user-icon-MAESXCA5alg.png"
+                alt="Perfil" class="profile-icon" />
+            <span id="user-name" class="profile-text">Mi Cuenta</span>
+            <a href="/logout" class="logout-button">Cerrar sesión</a>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <div class="main-container">
+        <div class="container">
+            <!-- Bienvenida -->
+            <section class="welcome-section">
+                <h1 class="welcome-title">Bienvenido de nuevo</h1>
+                <p class="welcome-subtitle">
+                    ¿Qué haremos el día de hoy? Revisemos juntos tu presupuesto y tomemos decisiones inteligentes para
+                    tu futuro financiero.
+                </p>
+
+                <!-- Chat -->
+                <div class="chat-container">
+                    <div class="chat-input-group">
+                        <input type="text" id="userInput" placeholder="Necesito estimar un presupuesto para..."
+                            class="search-input" />
+                        <button class="chat-button" onclick="sendMessage()">Enviar</button>
+                    </div>
+                    <div id="messages" class="chat-messages">
+                        <div class="message bot-message">
+                            <strong>CashApp:</strong> ¡Hola! Estoy aquí para ayudarte con tu presupuesto. ¿En qué puedo
+                            asistirte hoy?
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="conversation-history">
+                <h3 class="conversation-title">Tu historial de conversaciones más relevantes</h3>
+                <div class="conversation-item clickable">💰 Necesito estimar un presupuesto para vacaciones de verano...
+                </div>
+                <div class="conversation-item clickable">🎁 Quiero comenzar a ahorrar para los regalos de diciembre...
+                </div>
+                <div class="conversation-item clickable">🖥️ Cambiar de escritorio, ¿cuándo debería comprarlo...?</div>
+                <div class="conversation-item clickable">🏠 Análisis de gastos del hogar para optimizar mi
+                    presupuesto...</div>
+            </section>
+
+            <section class="noticias">
+                <h3>📰 Últimas noticias de finanzas</h3>
+                <ul id="noticias-lista"></ul>
+            </section>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <span class="footer-text">© 2025 CashApp. Todos los derechos reservados.</span>
+        <a href="aboutUs.html"><img src="styles/img/inmatec-logo.png" alt="INMATEC" class="partner-logo" /></a>
+    </footer>
+
+    <!-- Script-->
+    <script>
+        const inputEl = document.getElementById("userInput");
+        const messagesEl = document.getElementById("messages");
+
+        async function sendMessage() {
+            const text = inputEl.value.trim();
+            if (!text) return;
+
+            appendMessage(text, "user");
+            inputEl.value = "";
+            inputEl.focus();
+
+            try {
+                const resp = await fetch("/chat", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ message: text })
+                });
+
+                const data = await resp.json(); // espera { reply: "..." }
+                appendMessage(data.reply, "bot");
+            } catch (err) {
+                appendMessage("Ocurrió un error al contactar con Gemini 😕", "bot");
+                console.error(err);
+            }
+        }
+
+        function appendMessage(text, who) {
+            const div = document.createElement("div");
+            div.className = `message ${who}-message`;
+            div.innerHTML = `<strong>${who === "user" ? "Tú" : "CashApp"}:</strong> ${text}`;
+            messagesEl.appendChild(div);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        document.querySelectorAll(".conversation-item.clickable").forEach((elem) => {
+            elem.addEventListener("click", () => {
+                const texto = elem.textContent.trim();
+                inputEl.value = texto;
+                sendMessage();
+            });
+        });
+
+        fetch("/current-user")
+            .then(res => res.ok ? res.json() : Promise.reject())
+            .then(data => {
+                const nameEl = document.getElementById("user-name");
+                nameEl.textContent = `Bienvenida, ${data.username}`;
+            })
+            .catch(() => {
+                document.getElementById("user-name").textContent = "Mi Cuenta";
+            });
+
+        async function cargarNoticias() {
+            try {
+                const res = await fetch("/api/noticias");
+                const noticias = await res.json();
+                const lista = document.getElementById("noticias-lista");
+                lista.innerHTML = "";
+                noticias.slice(0, 5).forEach(noticia => {
+                    const li = document.createElement("li");
+                    li.classList.add("card");
+                    li.style.display = "flex";
+                    li.style.alignItems = "center";
+                    li.style.marginBottom = "1.5rem";
+                    li.innerHTML = `
+                        <a href="${noticia.url}" target="_blank" class="noticia-link" style="display: flex; align-items: center; text-decoration: none; color: inherit; width: 100%;">
+                            <img src="${noticia.image}" alt="Imagen de la noticia" style="width: 80px; height: 80px; object-fit: cover; border-radius: 10px; margin-right: 1.5rem; box-shadow: var(--sombra-card); border: 1px solid var(--color-borde);" />
+                            <div style="flex: 1;">
+                                <h4 style="font-size: 1.1rem; color: var(--color-dashboard-uno); margin-bottom: 0.5rem;">${noticia.title}</h4>
+                                <p style="color: var(--color-secundario); font-size: 0.95rem;">${noticia.description || ""}</p>
+                            </div>
+                        </a>
+                    `;
+                    lista.appendChild(li);
+                });
+            } catch (error) {
+                console.error("Error cargando noticias:", error);
+            }
+        }
+
+        cargarNoticias();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,525 @@
+/* ===============================
+           PALETA DE COLORES Y FUENTES
+           =============================== */
+:root {
+  --color-fondo: #ffffff;
+  --color-texto: #07141c;
+  --color-secundario: #283a3e;
+  --color-azul-primario: #0082fc;
+  --color-azul-hover: #0056d3;
+  --color-azul-claro: #e6f3ff;
+  --color-dashboard-uno: #0a5185;
+  --color-dashboard-dos: #0aadce;
+  --color-dashboard-tres: #0a5282;
+  --color-borde: #e0e6ed;
+  --color-input: #f8fafc;
+  --color-sombra: rgba(8, 130, 252, 0.1);
+  --color-gradiente: linear-gradient(135deg, #0082fc 0%, #0aadce 100%);
+
+  --fuente-principal: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --radio-borde: 12px;
+  --sombra-card: 0 8px 25px rgba(8, 130, 252, 0.08);
+  --sombra-hover: 0 12px 35px rgba(8, 130, 252, 0.15);
+}
+
+/* ===============================
+           RESET & BASE
+           =============================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--fuente-principal);
+  background: linear-gradient(135deg, #f8fafc 0%, #e6f3ff 100%);
+  color: var(--color-texto);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ===============================
+           ENCABEZADO MODERNO
+           =============================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--color-borde);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.logo {
+  height: 45px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: 25px;
+  background: var(--color-azul-claro);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.profile-container:hover {
+  background: var(--color-azul-primario);
+  transform: translateY(-2px);
+}
+
+.profile-container:hover .profile-text {
+  color: white;
+}
+
+.profile-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-azul-primario);
+}
+
+.profile-text {
+  font-weight: 600;
+  color: var(--color-azul-primario);
+  transition: color 0.3s ease;
+}
+
+/* ===============================
+           CONTENIDO PRINCIPAL
+           =============================== */
+.main-container {
+  padding-top: 90px;
+  padding-bottom: 60px;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ===============================
+           SECCIÓN DE BIENVENIDA
+           =============================== */
+.welcome-section {
+  text-align: center;
+  margin-bottom: 4rem;
+  animation: fadeInUp 0.8s ease;
+}
+
+.welcome-title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: var(--color-gradiente);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  animation: slideInDown 1s ease;
+}
+
+.welcome-subtitle {
+  font-size: 1.2rem;
+  color: var(--color-secundario);
+  margin-bottom: 2rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0.8;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.chat-input-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.search-input {
+  flex: 1;
+  padding: 16px 20px;
+  font-size: 1rem;
+  border: 2px solid var(--color-borde);
+  background: white;
+  border-radius: var(--radio-borde);
+  transition: all 0.3s ease;
+  box-shadow: var(--sombra-card);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--color-azul-primario);
+  box-shadow: 0 0 0 4px rgba(8, 130, 252, 0.1);
+  transform: translateY(-2px);
+}
+
+.chat-button {
+  padding: 16px 24px;
+  background: var(--color-gradiente);
+  color: white;
+  border: none;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--sombra-card);
+}
+
+.chat-button:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--sombra-hover);
+}
+
+.chat-messages {
+  background: white;
+  border-radius: var(--radio-borde);
+  padding: 1.5rem;
+  box-shadow: var(--sombra-card);
+  border: 1px solid var(--color-borde);
+  min-height: 100px;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 2rem;
+}
+
+.message {
+  margin-bottom: 1rem;
+  padding: 12px 16px;
+  border-radius: 8px;
+  animation: messageSlideIn 0.5s ease;
+}
+
+.user-message {
+  background: var(--color-azul-claro);
+  margin-left: 2rem;
+  text-align: right;
+}
+
+.bot-message {
+  background: var(--color-input);
+  margin-right: 2rem;
+  border-left: 4px solid var(--color-azul-primario);
+}
+
+/* ===============================
+           DASHBOARD MODERNO
+           =============================== */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-card);
+  border: 1px solid var(--color-borde);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--color-gradiente);
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sombra-hover);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-dashboard-uno);
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-icon {
+  width: 24px;
+  height: 24px;
+  background: var(--color-gradiente);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+}
+
+.purchase-list,
+.decisions-list {
+  list-style: none;
+  padding: 0;
+}
+
+.purchase-list li,
+.decisions-list li {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--color-borde);
+  position: relative;
+  padding-left: 24px;
+  transition: all 0.3s ease;
+}
+
+.purchase-list li::before,
+.decisions-list li::before {
+  content: "•";
+  color: var(--color-azul-primario);
+  position: absolute;
+  left: 0;
+  font-size: 1.5rem;
+}
+
+.purchase-list li:hover,
+.decisions-list li:hover {
+  background: var(--color-azul-claro);
+  padding-left: 32px;
+  border-radius: 6px;
+}
+
+/* ===============================
+           GRÁFICO MEJORADO
+           =============================== */
+.chart-container {
+  text-align: center;
+}
+
+.pie-chart {
+  width: 120px;
+  height: 120px;
+  background: conic-gradient(
+    var(--color-azul-primario) 0deg 144deg,
+    var(--color-dashboard-dos) 144deg 216deg,
+    var(--color-dashboard-tres) 216deg 288deg,
+    var(--color-azul-claro) 288deg 360deg
+  );
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  box-shadow: var(--sombra-card);
+  animation: rotate 2s ease-in-out;
+}
+
+.pie-chart::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.chart-info {
+  background: var(--color-input);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid var(--color-azul-primario);
+}
+
+.chart-info p {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.chart-info strong {
+  color: var(--color-azul-primario);
+  font-weight: 600;
+}
+
+/* ===============================
+           HISTORIAL DE CONVERSACIONES
+           =============================== */
+.conversation-history {
+  margin-bottom: 3rem;
+}
+
+.conversation-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--color-dashboard-tres);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.conversation-item {
+  background: white;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: var(--radio-borde);
+  border-left: 4px solid var(--color-azul-primario);
+  box-shadow: var(--sombra-card);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.conversation-item:hover {
+  transform: translateX(8px);
+  box-shadow: var(--sombra-hover);
+  border-left-width: 6px;
+}
+
+/* ===============================
+           FOOTER MODERNO
+           =============================== */
+.footer {
+  background: white;
+  border-top: 1px solid var(--color-borde);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.footer-text {
+  color: var(--color-secundario);
+  font-size: 0.9rem;
+}
+
+.partner-logo {
+  height: 35px;
+  transition: transform 0.3s ease;
+}
+
+.partner-logo:hover {
+  transform: scale(1.1);
+}
+
+/* ===============================
+           ANIMACIONES
+           =============================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===============================
+           RESPONSIVE DESIGN
+           =============================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .welcome-title {
+    font-size: 2.2rem;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .chat-input-group {
+    flex-direction: column;
+  }
+
+  .header {
+    padding: 0 1rem;
+  }
+
+  .footer {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .welcome-title {
+    font-size: 1.8rem;
+  }
+
+  .welcome-subtitle {
+    font-size: 1rem;
+  }
+}
