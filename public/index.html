@@ -127,7 +127,7 @@
                 const data = await resp.json(); // espera { reply: "..." }
                 appendMessage(data.reply, "bot");
             } catch (err) {
-                appendMessage("Ocurrió un error al contactar con Gemini 😕", "bot");
+                appendMessage("Para poder hablar conmigo, es neceario que inicies sesión😋", "bot");
                 console.error(err);
             }
         }
