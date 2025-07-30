@@ -127,7 +127,7 @@
                 const data = await resp.json(); // espera { reply: "..." }
                 appendMessage(data.reply, "bot");
             } catch (err) {
-                appendMessage("No mames flaco, primero registrate...che acelerado, se te nota el buro de credito así como la edad al Mario", "bot");
+                appendMessage("Para poder hablar conmigo, es necesario que inicies sesión😋", "bot");
                 console.error(err);
             }
         }
